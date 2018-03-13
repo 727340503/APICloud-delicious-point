@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>购物车</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <style>
+		header{ background-color: #ffffff; }
+        header ul li { height: 60px; line-height: 70px; text-align: center; display: none; color: #f4622a; position: relative;font-size: 20px;font-weight:bold;  }
+        header ul li.active{ display: block; }        
+        .return-btn{ float: left; margin-left:10px;}
+        #returnWin{
+	    		width: 44px;
+	    		height: 44px;
+	    		background-image: url(../icon/return.png);
+	    		background-size: auto 18px;
+	    		background-position: center;
+	    		background-repeat: no-repeat;
+	    		position: absolute;
+	    		left: 0;
+	    		top: 0;
+	    		margin-top:3%;
+	    		font-size:18px;
+	    	}
+	    	body{ background-color:#F5F5F5; }
+		
+		.cart-info{ background-color:#F5F5F5; }
+		.priduct-indo{ width:100%;height:240px;border-top:1px solid #F5F5F5;background-color:#FFFFFF;}
+		.product{ width: 90%;height:120px;margin:0px auto; }
+		.img-info{ float: left;width: 100px;height: 120px;line-height:120px;}
+		.img-info img{ width: 100px;height:100px;margin:0px auto; margin-top:10px;}
+		.product-text{ float: left;width: 60%;height:120px;line-height:120px;margin-left:10px;}
+		.product-text div{ height:30px; line-height: 30px;font-size:16px;}
+		.product-name{ margin-top:10px; }
+		.product-type{ color:#7C7C7C; }
+		.product-price{ color: #F4622A; }
+		.product-qty{ height: 100%; float: right;width:10%;}
+		.product-qty div{ height: 60px;text-align:right;line-height: 60px; font-size:18px;}
+		.qty-btn img{ width:30px;height:30px; }
+		
+		.pay-info{ width: 100%;height: 220px;color:#000000;font-size:18px;background-color:#FFFFFF;margin-top:100px; }
+		.remark-info{ width:100%;height: 120px; }
+		.remark-title{ float:left;height:60px;line-height: 50px;width:60px;text-align: right; }
+		.remark{ height: 120px;line-height: 120px;width: 100%; }
+		.remark-text{ width:70%;height: 100px;border: 0px;margin-top:10px;border: 1px solid #F5F5F5;margin-left:20px;}
+		
+		.pay{ width: 94%;height: 50px;font-size: 18px; margin:0px auto;border-top:1px solid #F5F5F5;}
+		.pay div{ float: left;height:50px;line-height: 50px; }
+		.pay-check{ float:right !important;}
+		.pay-check img{ width: 30px;height: 30px;margin-top:10px; }
+		
+		.pay-btn-info{ width: 94%;height:60px;font-size: 18px;margin:0px auto;border-top: 1px solid #F5F5F5; }
+		.pay-btn-info div{ float:left;}
+		.pay-title{ height:60px;line-height: 60px; }
+		.pay-total{ color: #F4622A; font-weight: bold;height: 60px;line-height: 60px; }
+		.pay-btn{float:right !important;height: 60px;line-height:60px;}
+		.confirm-btn{ width: 120px;height:38px !important;line-height:38px;border-radius:19px;background-color:#F4622A; text-align:center;color:#FFFFFF;margin-top:10px;font-size:18px;}
+		.active{ background-color:#FF7F50;color:#F5F5F5; }
+		
+		.weichat{ width: 94%;height: 50px;font-size: 18px; margin:0px auto;border-top:1px solid #F5F5F5;}
+		.weichat div{ float: left;height:50px;line-height: 50px; }
+		.weichat-check{ float:right !important;}
+		.weichat-check img{ width: 30px;height: 30px;margin-top:10px; }
+		.weichat-img img{width:40px;height: 40px;margin-top:5px;margin-right:10px;}
+
+    </style>
+</head>
+<body>
+	<header>
+        <ul>
+            <li class="border-b active" ><a id="returnWin" href="javascript:api.closeWin()"></a><span class="title">购物车</span></li>
+        </ul>
+    </header>
+    <div class="cart-info">
+    		<div class="priduct-indo">
+    			<div class="product">
+    				<div class="img-info"><img src="../icon/ueye.png" class="product-img" /></div>
+    				<div class="product-text">
+	    				<div class="product-name">香菇滑鸡饭</div>
+	    				<div class="product-type">午餐</div>
+	    				<div class="product-price">¥ 20.0</div>
+	    			</div>
+	    			<div class="product-qty">
+	    				<div class="qty">x1</div>
+	    				<div class="qty-btn"><img src="../icon/eyes.png" id="del-btn"  onclick="removeProduct()"/></div>
+	    			</div>
+    			</div>
+    			
+    			<div class="product" style="border-top:1px solid #F5F5F5;">
+    				<div class="img-info"><img src="../icon/ueye.png" class="product-img" /></div>
+    				<div class="product-text">
+	    				<div class="product-name">香菇滑鸡饭</div>
+	    				<div class="product-type">午餐</div>
+	    				<div class="product-price">¥ 20.0</div>
+	    			</div>
+	    			<div class="product-qty">
+	    				<div class="qty">x1</div>
+	    				<div class="qty-btn"><img src="../icon/eyes.png" id="del-btn" onclick="removeProduct()"/></div>
+	    			</div>
+    			</div>
+    		</div>
+    		
+    		<div class="pay-info">
+    			<div class="remark-info">
+    				<div class="remark-title">备注</div>
+    				<div class="remark"><textarea class="remark-text" id="remark-text" ></textarea></div>
+    			</div>
+    			
+    			<div class="pay" hidden="hidden" id="to-pay">
+    				<div class="pay-text">到付</div>
+    				<div class="pay-check"><img src="../icon/eyes.png" id="check-img"  /></div>
+    			</div>
+    			
+    			<div class="weichat" pay="weichat-pay">
+    				<div class="weichat-img"><img src="../icon/ueye.png" id="" /></div>
+    				<div class="weichat-text">微信支付</div>
+    				<div class="weichat-check"><img src="../icon/eyes.png" id="check-img"  /></div>
+    			</div>
+    			
+    			<div class="pay-btn-info">
+    				<div class="pay-title">总计:</div>
+    				<div class="pay-total">10元</div>
+    				<div class="pay-btn">
+    					<div class="confirm-btn" id="confirm-btn" hidden="hidden" >确认</div>
+    					<div class="confirm-btn" id="to-pay-btn">立即支付</div>
+    				</div>
+    			</div>
+    		</div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+</html>
+<script type="text/javascript">
+	apiready=function(){
+		init();
+	}
+	
+	function init(){
+		$('#confirm-btn,#to-pay-btn').on('touchstart',function(){
+			$api.addCls(this, 'active');;
+		}).on('touchend touchmove touchcancel',function(){
+			$api.removeCls(this, 'active');
+		});
+	}
+	
+	function removeProduct(){
+		alert(123);
+	}
+	
+</script>

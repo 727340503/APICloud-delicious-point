@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>登陆</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <style>
+		header{ background-color: #ffffff; }
+        header ul li { height: 60px; line-height: 70px; text-align: center; display: none; color: #f4622a; position: relative;font-size: 20px;font-weight:bold;  }
+        header ul li.active{ display: block; }        
+        .return-btn{ float: left; margin-left:10px;}
+        .box{ width:100%;text-align:center;}
+        .box div{ height:60px;width:94%; text-align:center;line-height: 60px;font-size:18px;color:#7c7c7c;margin:0px auto;}
+        .box-phone{ text-align:left !important; border-bottom:1px solid #F2F2F2;padding-left:6% }
+        .box-pwd{ text-align:left !important; border-bottom:1px solid #F2F2F2;padding-left:6%; width: 100%;}
+        .box-pwd input{ width: 80%; }
+        .eye_icon{ float:right; }
+        #showPwd{ width:40px;height: 40px;margin-top:10px;margin-right:5%; }
+        .box-btn{ padding-top:20px; }
+        .box-reg a{ color:#F4622A;font-size:18px; }
+        .box-reg .active{ color: #F5F5F5; }
+        .box-btn .login-btn{ height:45px;width:80%;margin:20px auto; font-size:22px;font-weight: bold;background-color:#F4622A;border-radius:25px; line-height: 45px;color:#FFFFFF; }
+        .box-btn .active{ background-color:#FF7F50; color: #F5F5F5;}
+        #returnWin{
+	    		width: 44px;
+	    		height: 44px;
+	    		background-image: url(../icon/return.png);
+	    		background-size: auto 20px;
+	    		background-position: center;
+	    		background-repeat: no-repeat;
+	    		position: absolute;
+	    		left: 0;
+	    		top: 0;
+	    		margin-top:3%;
+	    	}
+    </style>
+</head>
+<body>
+	<header>
+        <ul>
+            <li class="border-b active" ><a id="returnWin" href="javascript:api.closeWin()"></a><span class="title">登陆</span></li>
+        </ul>
+    </header>
+    <div class="box">
+    		<div class="box-phone">
+    			<input type="text" placeholder="手机号" maxlength="11" />
+    		</div>
+    		<div class="box-pwd">
+    			<input type="password" placeholder="密码" />
+    			<img src="../icon/eyes.png" class="eye_icon" data-src="eyes.png,ueye.png" id="showPwd" />
+    		</div>
+    		<div class="box-btn">
+    			<div class="login-btn" id="login-btn">登陆</div>
+    		</div>
+    		<div class="box-reg"><a href="javaxcript:;" id="reg_btn">注册</a></div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+</html>
+<script type="text/javascript">
+	apiready=function(){
+		$('#login-btn').on('touchstart',function(){
+			$api.addCls(this, 'active');;
+		}).on('touchend touchmove touchcancel',function(){
+			$api.removeCls(this, 'active');
+		});
+		
+		$('#reg_btn').on('touchstart',function(){
+			$api.addCls(this, 'active');;
+		}).on('touchend touchmove touchcancel',function(){
+			$api.removeCls(this, 'active');
+		});
+		$('#reg_btn').on('click',function(){
+			toRegister();
+		});
+		
+		$('#showPwd').on('click', function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			var type = $(this).prev(),png = $(this).attr('data-src').split(',');
+			if(type.attr('type') == 'password'){
+				type.attr('type', 'text');
+				$(this).attr('src', '../icon/' + png[1]);
+			}else{
+				type.attr('type', 'password');
+				$(this).attr('src', '../icon/' + png[0]);
+			}
+		});
+	}
+	
+	//去注册
+    function toRegister(){
+    		api.openWin({
+			name : 'register',
+			url : './regist.html',
+			reload : true
+		});
+    }
+</script>

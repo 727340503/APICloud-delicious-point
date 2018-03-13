@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>修改资料</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <style>
+		header{ background-color: #ffffff; }
+        header ul li { height: 60px; line-height: 70px; text-align: center; display: none; color: #f4622a; position: relative;font-size: 20px;font-weight:bold;  }
+        header ul li.active{ display: block; }        
+        #returnWin{
+	    		width: 44px;
+	    		height: 44px;
+	    		background-image: url(../icon/return.png);
+	    		background-size: auto 20px;
+	    		background-position: center;
+	    		background-repeat: no-repeat;
+	    		position: absolute;
+	    		left: 0;
+	    		top: 0;
+	    		margin-top:3%;
+	    	}
+	    	.result-img{ width: 100%;height: 200px;text-align:center; margin-top:50px;}
+	    	.result-img img{ width:150px;height:150px;}
+	    	.btn{ width:100%;height:60px; }
+	    	.btn-info{ width: 60%;margin:0px auto; }
+	    	.btn-info div{ float:left;width:100px;height:40px;line-height:40px;text-align:center;font-size:18px;margin-top:20px;border: 1px solid #F4622A; border-radius: 20px;color:#F4622A;}
+	    	.show-order{ margin-left:40px; }
+	    	.active{ color:#FFFFFF !important;background-color: #FF7F50; }
+    </style>
+</head>
+<body>
+	<header>
+        <ul>
+            <li class="border-b active" ><a id="returnWin" href="javascript:api.closeWin()"></a><span class="title">修改资料</span></li>
+        </ul>
+    </header>
+    <div class="result-img">
+    		<img src="../icon/eyes.png"  />
+    </div>
+    <div class="btn">
+    		<div class="btn-info">
+	    		<div class="carry-btn" id="carry-btn">继续逛</div>
+	    		<div class="show-order" id="show-order">查看订单</div>
+    		</div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+</html>
+<script type="text/javascript">
+	apiready=function(){
+		init();
+	}
+	
+	function init(){
+	
+		$('#carry-btn,#show-order').on('touchstart',function(){
+			$api.addCls(this, 'active');;
+		}).on('touchend touchmove touchcancel',function(){
+			$api.removeCls(this, 'active');
+		});
+	}
+</script>

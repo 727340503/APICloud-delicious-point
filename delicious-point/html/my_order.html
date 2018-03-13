@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>我的订单</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <style>
+		header{ background-color: #ffffff; }
+        header ul li { height: 60px; line-height: 70px; text-align: center; display: none; color: #f4622a; position: relative;font-size: 20px;font-weight:bold;  }
+        header ul li.active{ display: block; }        
+        .return-btn{ float: left; margin-left:10px;}
+        #returnWin{
+	    		width: 44px;
+	    		height: 44px;
+	    		background-image: url(../icon/return.png);
+	    		background-size: auto 20px;
+	    		background-position: center;
+	    		background-repeat: no-repeat;
+	    		position: absolute;
+	    		left: 0;
+	    		top: 0;
+	    		margin-top:3%;
+	    	}
+	    	
+	    	.order-tab{ width:100%;height: 45px; }
+	    	.tab-title .dishes-text,.mall-text{float:left;width: 50%;height: 45px;line-height:45px;font-size:18px;color:#000000;text-align:center;}
+	    	.tab-border { width: 100%;height: 2px; }
+	    	.tab-border .dishes-border,.mall-border{ width: 50%;height:2px;float:left;border-bottom:2px solid #F5F5F5; }
+	    	.order-tab .active{ color:#F4622A;  }
+	    	.tab-border .active{ border-bottom:2px solid #F4622A;}
+	    	.dishes-ul,.mall-ul{ background-color:#F2F2F2;height:90%; }
+	    	.dishes-ul .dishes-li{ height:150px;width:100%;background-color:#FFFFFF;margin-bottom:20px; }
+	    	.dishes-li .dishes-li-detail{ width: 90%;height:100px; margin:0px auto;}
+	    	.dishes-li .dishes-li-btn{ height:50px;width:90%;margin:0px auto;border-top:1px solid #F5F5F5; font-size:18px;}
+	    	
+	    	.dishes-li-detail .dishes-order-img,.dishes-order-text,.dishes-order-qty{ float:left; font-size:18px;}
+	    	.dishes-order-img{ width:20%;height:100px;line-height:100px;text-align:center; }
+	    	.dishes-order-img img{ width: 80%;height:80px; margin-top:10px;}
+	    	.dishes-order-text{ width: 55%;height: 100px; text-align:left;margin-left:10px;}
+	    	.dishes-order-text div{ height: 40px;line-height: 40px;width: 100%; margin-top:5px;}
+	    	.dishes-order-qty{width:20%;height:50px;line-height: 50px;color:#7C7C7C;text-align:right;}
+	    	.dishes-li-btn .dishes-status{ float:left; width: 50%;height:50px;line-height: 50px;}
+	    	.dishes-li-btn .dishes-btn{ float: right; width: 48%;height: 50px;line-height: 50px;text-align:right;}
+	    	.dishes-btn div{ float:right;background-color:#F4622A;color:#FFFFFF; width:60%;height: 35px;line-height:35px;text-align:center;font-size: 16px;border-radius:17.5px;margin-top:5px;}
+   		.dishes-btn .active{ color:#F5F5F5;background-color:#FF7F50; }
+   		
+   		.mall-ul .mall-li{ height:150px;width:100%;background-color:#FFFFFF;margin-bottom:20px; }
+	    	.mall-li .mall-li-detail{ width: 90%;height:100px; margin:0px auto;}
+	    	.mall-li .mall-li-btn{ height:50px;width:90%;margin:0px auto;border-top:1px solid #F5F5F5; font-size:18px;}
+	    	
+	    	.mall-li-detail .mall-order-img,.mall-order-text,.mall-order-qty{ float:left; font-size:18px;}
+	    	.mall-order-img{ width:20%;height:100px;line-height:100px;text-align:center; }
+	    	.mall-order-img img{ width: 80%;height:80px; margin-top:10px;}
+	    	.mall-order-text{ width: 55%;height: 100px; text-align:left;margin-left:10px;}
+	    	.mall-order-text div{ height: 40px;line-height: 40px;width: 100%; margin-top:5px;}
+	    	.mall-order-qty{width:20%;height:50px;line-height: 50px;color:#7C7C7C;text-align:right;}
+	    	.mall-li-btn .mall-status{ float:left; width: 50%;height:50px;line-height: 50px;}
+	    	.mall-li-btn .mall-btn{ float: right; width: 48%;height: 50px;line-height: 50px;text-align:right;}
+	    	.mall-btn div{ float:right;background-color:#F4622A;color:#FFFFFF; width:60%;height: 35px;line-height:35px;text-align:center;font-size: 16px;border-radius:17.5px;margin-top:5px;}
+   		.mall-btn .active{ color:#F5F5F5;background-color:#FF7F50; }
+    </style>
+</head>
+<body>
+	<header>
+        <ul>
+            <li class="border-b active" ><a id="returnWin" href="javascript:api.closeWin()"></a><span class="title">我的订单</span></li>
+        </ul>
+    </header>
+    <div class="order-tab">
+    		<div class="tab-title">
+    			<div class="dishes-text active">点餐</div>
+    			<div class="mall-text">商城</div>
+    		</div>
+    		<div class="tab-border">
+    			<div class="dishes-border active"></div>
+    			<div class="mall-border"></div>
+    		</div>
+    </div>
+    <div class="dishes-ul" id="dishes-ul" >
+    		<div class="dishes-li">
+			<div class="dishes-li-detail" onclick="toDishesDetail()">
+				<div class="dishes-order-img"><img src="../icon/eyes.png" id="order-img" class="order-img" /></div>
+				<div class="dishes-order-text">
+					<div ><span>瘦肉粥</span></div>
+					<div ><span>¥10</span></div>
+				</div>
+				<div class="dishes-order-qty"><span>数量:1</span></div>
+			</div>
+    			<div class="dishes-li-btn">
+    				<div class="dishes-status" id="dishes-statu">待配餐</div>
+    				<div class="dishes-btn">
+    					<div id="dishes-statu-btn" class="dishes-statu-btn">确认配餐</div>
+    				</div>
+    			</div>
+    		</div>
+    		
+    		<div class="dishes-li">
+			<div class="dishes-li-detail" onclick="toDishesDetail()">
+				<div class="dishes-order-img"><img src="../icon/eyes.png" id="order-img" class="order-img" /></div>
+				<div class="dishes-order-text">
+					<div ><span>瘦肉粥</span></div>
+					<div ><span>¥10</span></div>
+				</div>
+				<div class="dishes-order-qty"><span>数量:1</span></div>
+			</div>
+    			<div class="dishes-li-btn">
+    				<div class="dishes-status" id="dishes-statu">待配餐</div>
+    				<div class="dishes-btn">
+    					<div id="dishes-statu-btn" class="dishes-statu-btn">确认配餐</div>
+    				</div>
+    			</div>
+    		</div>
+    		
+    		<div class="dishes-li">
+			<div class="dishes-li-detail"  onclick="toDishesDetail()">
+				<div class="dishes-order-img"><img src="../icon/eyes.png" id="order-img" class="order-img" /></div>
+				<div class="dishes-order-text">
+					<div ><span>瘦肉粥</span></div>
+					<div ><span>¥10</span></div>
+				</div>
+				<div class="dishes-order-qty"><span>数量:1</span></div>
+			</div>
+    			<div class="dishes-li-btn">
+    				<div class="dishes-status" id="dishes-statu">待配餐</div>
+    				<div class="dishes-btn">
+    					<div id="dishes-statu-btn" class="dishes-statu-btn">确认配餐</div>
+    				</div>
+    			</div>
+    		</div>
+    </div>
+    <div class="mall-ul" id="mall-ul"  hidden="hidden">
+    		<div class="mall-li" onclick="toMalletail()">
+    			<div class="mall-li-detail">
+				<div class="mall-order-img"><img src="../icon/eyes.png" id="mall-img" class="mall-img" /></div>
+				<div class="mall-order-text">
+					<div ><span>家用电子秤</span></div>
+					<div ><span>¥27.5</span></div>
+				</div>
+				<div class="mall-order-qty"><span>数量:1</span></div>
+			</div>
+    			<div class="mall-li-btn">
+    				<div class="mall-status" id="mall-statu">未付款</div>
+    				<div class="mall-btn">
+    					<div id="mall-statu-btn" class="mall-statu-btn">去支付</div>
+    				</div>
+    			</div>
+    		</div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+</html>
+<script type="text/javascript">
+	apiready=function(){
+		init();
+	}
+	
+	function init(){
+		$('.dishes-statu-btn').on('touchstart',function(){
+			$api.addCls(this, 'active');
+		}).on('touchend touchmove touchcance',function(){
+			$api.removeCls(this, 'active');
+		});
+		
+		$('.mall-statu-btn').on('touchstart',function(){
+			$api.addCls(this, 'active');
+		}).on('touchend touchmove touchcance',function(){
+			$api.removeCls(this, 'active');
+		});
+	
+		$('.dishes-text,.mall-text').on('touchstart',function(){
+			if(!$api.hasCls(this, 'active')){
+				if($api.hasCls(this, "dishes-text")){
+					$api.removeCls($api.dom('.mall-text'), 'active');
+					$api.removeCls($api.dom('.mall-border'), 'active');
+					$api.addCls(this, 'active');
+					$api.addCls($api.dom('.dishes-border'), 'active');
+					$('#mall-ul').hide();
+					$('#dishes-ul').show();
+				}else{
+					$api.removeCls($api.dom('.dishes-text'), 'active');
+					$api.removeCls($api.dom('.dishes-border'), 'active');
+					$api.addCls(this, 'active');
+					$api.addCls($api.dom('.mall-border'), 'active');
+					$('#dishes-ul').hide();
+					$('#mall-ul').show();
+				}
+			}
+		});
+		
+	}
+	
+	function toDishesDetail(){
+		api.openWin({
+			name : 'dishes_order_detail',
+			url : './dishes_order_detail.html',
+			reload : true
+		});
+	}
+	
+	function toMalletail(){
+		api.openWin({
+				name : 'mall_order_detail',
+				url : './mall_order_detail.html',
+				reload : true
+			});
+	}
+</script>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>我的</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <style>
+        .empty{ text-align: center; padding: 120px 0; }
+        body{ background-color: #f2f2f2; }
+        .box{ height:70px;line-height: 70px;font-size:18px;color:#000000;margin:0 auto;width: 100%;background-color: #FFFFFF;}
+        .box div{ width:100%;height: 100%;border-top:1px solid #F2F2F2;}
+        .box .box-div-first{ border-top:0px; }
+        .box-text .text-msg{ float: left;margin-left:10px; }
+        .box-text .text-point{ color:#f4622a;float: right;margin-right:10px;}
+        .box-btn{ height:80px;width: 100%;text-align:center; line-height:80px;padding-top:20px;}
+        .box-btn .login-btn,.logout-btn{ height:45px;width:80%;margin:20px auto; font-size:22px;font-weight: bold;background-color:#F4622A;border-radius:25px; line-height: 45px;color:#FFFFFF; }
+        .box-btn .active{ background-color:#FF7F50; color: #F5F5F5;}
+        /*.box-btn .btn{ height:40px; width:80%;font-size:22px;font-weight: bold;background-color:#F4622A;border-radius:25px;border:1px solid #000000;}*/
+    </style>
+</head>
+<body>
+	<div class="box" >
+		<div class="box-div-first" id="my-order">
+			<p class="box-text"><span class="text-msg">我的订单</span><span class="text-point">></span></p>
+		</div>
+	</div>
+	<div class="box">
+		<div id="modify-userinfo">
+			<p class="box-text"><span class="text-msg">修改个人资料</span><span class="text-point">></span></p>
+		</div>
+	</div>
+	<div class="box-btn">
+		<div class="login-btn" id="login-btn">登陆</div>
+		<div class="logout-btn" id="logout-btn" hidden="hidden">退出登陆</div>
+		<!--<input type="button" value="退出登陆" id="logout_btn" class="btn" hidden="hidden"/>
+		<input type="button" value="登陆" id="login_btn" class="btn"/>-->
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+</html>
+<script type="text/javascript">
+	apiready=function(){
+		$('#login-btn,#logout-btn').on('touchstart',function(){
+			$api.addCls(this, 'active');
+		}).on('touchend touchmove touchcancel',function(){
+			$api.removeCls(this, 'active');
+		});
+		$('#login-btn').on('click',function(){
+			toLogin();
+		});
+		$('#modify-userinfo').on('click',function(){
+			toUserInfo();
+		});
+		$('#my-order').on('click',function(){
+			toMyOrder();
+		});
+	}
+	
+	function toLogin(){
+		api.openWin({
+			name : 'login',
+			url : './login.html',
+			reload : true
+		});
+	}
+	
+	function toUserInfo(){
+		api.openWin({
+			name : 'user_info',
+			url : './user_info.html',
+			reload : true
+		});
+	}
+	
+	function toMyOrder(){
+		api.openWin({
+			name : 'my_order',
+			url : './my_order.html',
+			reload : true
+		});
+	}
+
+</script>

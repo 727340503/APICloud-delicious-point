@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>订单详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <style>
+		header{ background-color: #ffffff; }
+        header ul li { height: 60px; line-height: 70px; text-align: center; display: none; color: #f4622a; position: relative;font-size: 20px;font-weight:bold;  }
+        header ul li.active{ display: block; }        
+        .return-btn{ float: left; margin-left:10px;}
+        #returnWin{
+	    		width: 44px;
+	    		height: 44px;
+	    		background-image: url(../icon/return.png);
+	    		background-size: auto 20px;
+	    		background-position: center;
+	    		background-repeat: no-repeat;
+	    		position: absolute;
+	    		left: 0;
+	    		top: 0;
+	    		margin-top:3%;
+	    	}
+	    	body{ background-color:#F5F5F5; }
+	    	.order-detail{ height:120px;background-color:#FFFFFF; font-size:16px;color:#7C7C7C;}
+	    	.order-detail .detail-title,.detail-info,.detail-summary{ height:40px;width: 100%; line-height: 40px; width:94%; margin:0px auto;}
+	    	.detail-info,.detail-summary{ border-top:1px solid #f2f2f2; }
+	    	.detail-info-item{ width:100%;height:100%;color:#000000; }
+		.item-name{ width: 30%; text-align:left; float: left; }
+		.item-category{ width:30%; text-align:center;float: left;}
+		.item-num{ width: 20%; text-align:center; float:left; }
+		.item-price{ width: 20%;text-align:right; float:left; }
+		.detail-summary div{ width:50%;float:left; }
+		.summary-price{ text-align:right; }
+		
+		.order-code{ margin-top:20px;background-color:#FFFFFF;width:100%;height:160px; color: #7C7C7C; font-size:16px;}
+		.code-title{ height:40px;width: 94%;margin:0px auto;line-height: 40px; }
+		.code-img{ text-align:center;width:94%;height:120px; margin:0px auto; border-top:1px solid #F2F2F2;}
+		.order-code-img{ width:120px; height:120px; }
+		
+		.order-pay-info{ margin-top:20px; background-color:#FFFFFF;width:100%; height:120px;color:#7C7C7C;font-size:16px; }
+		.pay-title{ height: 40px;width: 94%;margin:0px auto;line-height:40px; }
+		.pay-time,.pay-type{ height:40px;width:94%;margin:0px auto; border-top:1px solid #F2F2F2; }
+		.pay-time div{float:left;height:40px;line-height:40px;text-align:right;}
+		.pay-time-title,.pay-type-title{ width: 30%;text-align:left !important; }
+		.pay-time-info,.pay-type-msg{ width: 70%; }
+		.pay-mseals-time div{float:left;height:40px;line-height:40px;text-align:right;}
+		.pay-type div{float:left;height:40px;line-height:40px;text-align:right;}
+		.order-btn{ width:100%;height:60px;background-color:#FFFFFF;font-size:16px;color: #7C7C7C; margin-top:20px;}
+		.order-status-info{ width: 94%; margin:0px auto;}
+		.order-status{ float:left;height:60px;line-height: 60px;width:30%; }
+		.status-info{ float: right;height:60px;line-height: 60px; width:70%;text-align:center;}
+		.status-btn{ width: 40%;background-color:#F4622A;height:40px;line-height: 40px;  float: right;color: #FFFFFF;margin-top:10px; border-radius: 20px;}
+		.order-status-info .active{ background-color:#FF7F50;color:#F5F5F5; }
+    </style>
+</head>
+<body>
+	<header>
+        <ul>
+            <li class="border-b active" ><a id="returnWin" href="javascript:api.closeWin()"></a><span class="title">订单详情</span></li>
+        </ul>
+    </header>
+    <div class="order-detail">
+    		<div class="detail-title"><span>订单详情</span></div>
+    		<div class="detail-info">
+    			<div class="detail-info-item">
+    				<div class="item-name">瘦肉粥</div>
+    				<div class="item-category">早餐</div>
+    				<div class="item-num">x1</div>
+    				<div class="item-price">¥10</div>
+    			</div>
+    		</div>
+    		<div class="detail-summary">
+    			<div>合记</div>
+    			<div class="summary-price">¥10</div>
+    		</div>
+    </div>
+    <div class="order-code">
+    		<div class="code-title"><span>二维码</span></div>
+    		<div class="code-img"><img src="../icon/ueye.png" id="order-code-img" class="order-code-img" /></div>
+    </div>
+    <div class="order-pay-info">
+    		<div class="pay-title"><span>订单信息</span></div>
+    		<div class="pay-time">
+    			<div class="pay-time-title"><span>下单时间</span></div>
+    			<div class="pay-time-info"><span>2016-08-25 23:23:23</span></div>
+    		</div>
+    		<div class="pay-type">
+    			<div class="pay-type-title"><span>支付方式</span></div>
+    			<div class="pay-type-msg"><span>到付</span></div>
+    		</div>
+    </div>
+    <div class="order-btn">
+    		<div class="order-status-info">
+    			<div class="order-status"><span>待收货</span></div>
+	    		<div class="status-info">
+	    			<div class="status-btn" id="status-btn">确认就餐</div>
+	    		</div>
+    		</div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+</html>
+<script type="text/javascript">
+	apiready=function(){
+		init();
+	}
+	
+	function init(){
+		$('#status-btn').on('touchstart',function(){
+			$api.addCls(this, 'active');;
+		}).on('touchend touchmove touchcancel',function(){
+			$api.removeCls(this, 'active');
+		});
+	}
+</script>
